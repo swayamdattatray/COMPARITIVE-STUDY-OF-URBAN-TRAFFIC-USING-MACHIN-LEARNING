@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Urban Traffic Flow Prediction - Comparative Study</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>Comparative Study of ML Models for Urban Traffic Flow Prediction</h1>
+      <p>
+        Final-year engineering project interface to summarize workflow, models,
+        metrics, and outcomes.
+      </p>
+      <a class="btn" href="#models">Explore Models</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card" id="overview">
+      <h2>Project Overview</h2>
+      <p>
+        This project predicts <strong>traffic_flow</strong> using historical traffic and contextual
+        attributes such as speed, time, day, and weather. It compares statistical,
+        machine learning, and deep learning approaches.
+      </p>
+      <ul>
+        <li>Data preprocessing with missing value handling and scaling</li>
+        <li>Feature engineering using lag and rolling statistics</li>
+        <li>Train/test split (80:20) in chronological order</li>
+      </ul>
+    </section>
+
+    <section class="grid" id="models">
+      <article class="card model-card">
+        <h3>ARIMA</h3>
+        <p>Classical time-series forecasting baseline for univariate traffic signal modeling.</p>
+      </article>
+      <article class="card model-card">
+        <h3>Random Forest</h3>
+        <p>Ensemble tree regressor for robust nonlinear relationships in engineered features.</p>
+      </article>
+      <article class="card model-card">
+        <h3>XGBoost</h3>
+        <p>Boosted tree model with strong tabular-data performance for traffic prediction.</p>
+      </article>
+      <article class="card model-card">
+        <h3>LSTM</h3>
+        <p>Sequence learning model for capturing temporal dependencies in traffic flow patterns.</p>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>Evaluation Metrics</h2>
+      <div class="metric-grid">
+        <div class="metric">MAE</div>
+        <div class="metric">RMSE</div>
+        <div class="metric">MAPE</div>
+      </div>
+      <p class="note">Lower values indicate better model performance.</p>
+    </section>
+
+    <section class="card">
+      <h2>Results Snapshot (Template)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>MAE</th>
+            <th>RMSE</th>
+            <th>MAPE (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>ARIMA</td><td>--</td><td>--</td><td>--</td></tr>
+          <tr><td>Random Forest</td><td>--</td><td>--</td><td>--</td></tr>
+          <tr><td>XGBoost</td><td>--</td><td>--</td><td>--</td></tr>
+          <tr><td>LSTM</td><td>--</td><td>--</td><td>--</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>Urban Traffic Flow Prediction Study • Python ML + Time Series + Deep Learning</p>
+  </footer>
+</body>
+</html>

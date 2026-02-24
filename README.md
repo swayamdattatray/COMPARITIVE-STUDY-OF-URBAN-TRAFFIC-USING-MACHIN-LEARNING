@@ -68,3 +68,14 @@ After execution:
 ## Notes
 - `xgboost` and `tensorflow` are optional at runtime. If unavailable, the script skips corresponding models and continues with available ones.
 - Code is written with clear structure and comments to align with final-year engineering project expectations.
+
+## Web Presentation (HTML/CSS)
+A static front-end page is included for project presentation/demo:
+- `index.html`
+- `styles.css`
+
+Open directly in browser or serve locally:
+```bash
+python -m http.server 8000
+```
+Then visit `http://localhost:8000`.
