@@ -1,0 +1,121 @@
+:root {
+  --bg: #0b1220;
+  --surface: #121c2f;
+  --surface-alt: #182742;
+  --text: #e7eefc;
+  --muted: #a6b6d9;
+  --accent: #4da3ff;
+  --accent-2: #67e8f9;
+  --border: #2b3e63;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(180deg, #070d18, var(--bg));
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.container {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+.hero {
+  padding: 5rem 0 3rem;
+  text-align: center;
+  background: radial-gradient(circle at top, #1b335f 0%, transparent 60%);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+}
+
+.hero p {
+  max-width: 720px;
+  margin: 1rem auto 1.4rem;
+  color: var(--muted);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  border-radius: 10px;
+  color: #041023;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  text-decoration: none;
+  font-weight: 600;
+}
+
+main {
+  padding-bottom: 3rem;
+}
+
+.card {
+  background: linear-gradient(180deg, var(--surface), var(--surface-alt));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.2rem 1.4rem;
+  margin: 1rem 0;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.model-card h3 {
+  margin-top: 0;
+  color: var(--accent-2);
+}
+
+.metric-grid {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.metric {
+  background: #0f1a30;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.5rem 0.85rem;
+  font-weight: 600;
+}
+
+.note {
+  color: var(--muted);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+th,
+td {
+  border: 1px solid var(--border);
+  padding: 0.65rem;
+  text-align: center;
+}
+
+th {
+  background: #0d1730;
+}
+
+footer {
+  text-align: center;
+  padding: 1.2rem 0 2rem;
+  color: var(--muted);
+  border-top: 1px solid #1a2640;
+}
