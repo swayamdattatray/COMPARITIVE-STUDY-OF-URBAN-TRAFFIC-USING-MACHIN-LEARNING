@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: codementor_ai
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  api:
+    build: .
+    command: npm run dev --workspace apps/api
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/codementor_ai
+      JWT_SECRET: local-dev-secret
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+volumes:
+  postgres-data:

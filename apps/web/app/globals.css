@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 220 33% 98%;
+  --foreground: 224 37% 10%;
+  --muted: 222 18% 92%;
+  --primary: 247 89% 60%;
+  --accent: 187 90% 48%;
+  --border: 220 18% 84%;
+}
+
+.dark {
+  --background: 226 47% 7%;
+  --foreground: 216 33% 97%;
+  --muted: 224 30% 14%;
+  --primary: 252 100% 72%;
+  --accent: 186 100% 57%;
+  --border: 224 25% 20%;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: radial-gradient(circle at 20% 0%, rgba(124, 58, 237, .24), transparent 30%),
+    radial-gradient(circle at 80% 10%, rgba(34, 211, 238, .18), transparent 35%),
+    hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.glass {
+  border: 1px solid rgba(255, 255, 255, .16);
+  background: linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
+  box-shadow: 0 20px 80px rgba(15, 23, 42, .16);
+  backdrop-filter: blur(18px);
+}
+
+.dark .glass { background: linear-gradient(135deg, rgba(15, 23, 42, .72), rgba(15, 23, 42, .42)); }
