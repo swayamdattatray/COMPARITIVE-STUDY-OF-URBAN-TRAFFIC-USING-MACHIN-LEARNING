@@ -1,0 +1,161 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role { STUDENT TRAINER ADMIN }
+enum TestType { MILESTONE WEEKLY_SATURDAY FINAL }
+enum SubmissionStatus { PENDING PASSED FAILED }
+
+model User {
+  id              String            @id @default(cuid())
+  name            String
+  email           String            @unique
+  passwordHash    String?
+  googleId        String?           @unique
+  emailVerifiedAt DateTime?
+  role            Role              @default(STUDENT)
+  profile         StudentProfile?
+  enrollments     Enrollment[]
+  submissions     TestSubmission[]
+  certificates    Certificate[]
+  activities      Activity[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+}
+
+model StudentProfile {
+  id          String @id @default(cuid())
+  userId      String @unique
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  avatarUrl   String?
+  careerGoal  String?
+  xp          Int    @default(0)
+  level       Int    @default(1)
+  streakDays  Int    @default(0)
+  weeklyHours Float  @default(0)
+}
+
+model Course {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  title       String
+  description String
+  levels      CourseLevel[]
+  trainer     AiTrainer?
+  enrollments Enrollment[]
+  tests       Test[]
+  createdAt   DateTime     @default(now())
+}
+
+model CourseLevel {
+  id        String   @id @default(cuid())
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  name      String
+  order     Int
+  lessons   Lesson[]
+}
+
+model Lesson {
+  id          String       @id @default(cuid())
+  levelId     String
+  level       CourseLevel  @relation(fields: [levelId], references: [id], onDelete: Cascade)
+  title       String
+  videoUrl    String?
+  notes       String?
+  resources   Json?
+  playground  Boolean      @default(false)
+  assignments Assignment[]
+  progress    LessonProgress[]
+}
+
+model AiTrainer {
+  id           String  @id @default(cuid())
+  courseId     String  @unique
+  course       Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  specialty    String
+  systemPrompt String
+  vectorIndex  String?
+  isActive     Boolean @default(true)
+}
+
+model Enrollment {
+  id          String   @id @default(cuid())
+  userId      String
+  courseId    String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  progressPct Int      @default(0)
+  startedAt   DateTime @default(now())
+  completedAt DateTime?
+
+  @@unique([userId, courseId])
+}
+
+model LessonProgress {
+  id        String   @id @default(cuid())
+  lessonId  String
+  lesson    Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  userId    String
+  completed Boolean  @default(false)
+  score     Int?
+  updatedAt DateTime @updatedAt
+}
+
+model Assignment {
+  id          String @id @default(cuid())
+  lessonId    String
+  lesson      Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  title       String
+  prompt      String
+  language    String
+  starterCode String?
+}
+
+model Test {
+  id          String           @id @default(cuid())
+  courseId    String
+  course      Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  type        TestType
+  unlockAtPct Int?
+  scheduledAt DateTime?
+  questions   Json
+  submissions TestSubmission[]
+}
+
+model TestSubmission {
+  id          String           @id @default(cuid())
+  testId      String
+  test        Test             @relation(fields: [testId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  answers     Json
+  score       Int
+  status      SubmissionStatus @default(PENDING)
+  aiAnalysis  Json
+  submittedAt DateTime         @default(now())
+}
+
+model Certificate {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseName     String
+  certificateId  String   @unique
+  qrCodeUrl      String
+  completionDate DateTime @default(now())
+}
+
+model Activity {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  message   String
+  metadata  Json?
+  createdAt DateTime @default(now())
+}
